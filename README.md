@@ -16,7 +16,8 @@
             --text: #333;
         }
 
-        body {
+<body>
+{
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             background-color: var(--bg);
@@ -25,16 +26,16 @@
             padding: 20px;
         }
 
-        .container {
+container {
             max-width: 1000px;
             margin: 0 auto;
         }
 
-        h1, h2, h3 {
+h1, h2, h3 {
             color: var(--primary);
         }
 
-        .header {
+header {
             text-align: center;
             margin-bottom: 30px;
             padding: 20px;
@@ -43,13 +44,13 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .tabs {
+.tabs {
             display: flex;
             gap: 10px;
             margin-bottom: 20px;
         }
 
-        .tab-btn {
+.tab-btn {
             padding: 10px 20px;
             border: none;
             background: #e0e0e0;
@@ -59,12 +60,12 @@
             transition: background 0.3s;
         }
 
-        .tab-btn.active {
+.tab-btn.active {
             background: var(--accent);
             color: white;
         }
 
-        .tab-content {
+.tab-content {
             display: none;
             background: var(--card-bg);
             padding: 25px;
@@ -72,21 +73,21 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .tab-content.active {
+.tab-content.active {
             display: block;
         }
 
-        .input-group {
+.input-group {
             margin-bottom: 15px;
         }
 
-        label {
+ label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
         }
 
-        input[type="text"] {
+ input[type="text"] {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
@@ -94,7 +95,7 @@
             box-sizing: border-box;
         }
 
-        button.calc-btn {
+button.calc-btn {
             background: var(--accent);
             color: white;
             border: none;
@@ -104,11 +105,11 @@
             font-size: 16px;
         }
 
-        button.calc-btn:hover {
+ button.calc-btn:hover {
             background: #2980b9;
         }
 
-        .results {
+.results {
             margin-top: 20px;
             background: #f1f8ff;
             padding: 15px;
@@ -116,20 +117,20 @@
             border-radius: 4px;
         }
 
-        .result-item {
+.result-item {
             margin-bottom: 10px;
             font-family: 'Courier New', Courier, monospace;
             font-size: 1.05em;
         }
 
-        canvas {
+ canvas {
             border: 1px solid #ccc;
             background-color: #fff;
             margin-top: 15px;
             border-radius: 4px;
         }
 
-        .paradox-box {
+.paradox-box {
             background: #fff3cd;
             border: 1px solid #ffeeba;
             color: #856404;
@@ -148,18 +149,17 @@
     </div>  
   
 
-    <div class="tabs">
+ <div class="tabs">
         <button class="tab-btn active" onclick="switchTab('algebra')">Álgebra de Conjuntos</button>
         <button class="tab-btn" onclick="switchTab('cartesiano')">Producto Cartesiano 2D</button>
         <button class="tab-btn" onclick="switchTab('russell')">Paradoja de Russell</button>
     </div>
-
-    <!-- Módulo 1: Álgebra de Conjuntos -->
+<!-- Módulo 1: Álgebra de Conjuntos -->
     <div id="algebra" class="tab-content active">
         <h2>Calculadora de Operaciones de Conjuntos</h2>
         <p>Ingrese los elementos de los conjuntos separados por comas (ejemplo: <code>1, 2, 3</code> o <code>a, b, c</code>):</p>
         
-        <div class="input-group">
+<div class="input-group">
             <label for="setA">Conjunto A:</label>
             <input type="text" id="setA" value="1, 2, 3">
         </div>
@@ -168,9 +168,9 @@
             <input type="text" id="setB" value="2, 3, 4">
         </div>
 
-        <button class="calc-btn" onclick="calculateSets()">Calcular Operaciones</button>
+ <button class="calc-btn" onclick="calculateSets()">Calcular Operaciones</button>
 
-        <div class="results" id="setResults">
+ <div class="results" id="setResults">
             <div class="result-item"><strong>A ∪ B (Unión):</strong> <span id="resUnion">-</span></div>
             <div class="result-item"><strong>A ∩ B (Intersección):</strong> <span id="resInter">-</span></div>
             <div class="result-item"><strong>A \ B (Diferencia A - B):</strong> <span id="resDiffAB">-</span></div>
@@ -179,13 +179,12 @@
             <div class="result-item"><strong>P(A) (Conjunto Potencia de A):</strong> <span id="resPowerA">-</span></div>
         </div>
     </div>
-
-    <!-- Módulo 2: Producto Cartesiano -->
+<!-- Módulo 2: Producto Cartesiano -->
     <div id="cartesiano" class="tab-content">
         <h2>Visualizador del Producto Cartesiano (A × B)</h2>
         <p>Ingrese conjuntos numéricos para graficar las parejas ordenadas <code>(a, b)</code> en el plano:</p>
         
-        <div class="input-group">
+ <div class="input-group">
             <label for="cartA">Conjunto A (Eje X):</label>
             <input type="text" id="cartA" value="1, 2, 3, 4">
         </div>
@@ -194,21 +193,20 @@
             <input type="text" id="cartB" value="1, 2, 3">
         </div>
 
-        <button class="calc-btn" onclick="drawCartesian()">Generar Gráfico A × B</button>
+ <button class="calc-btn" onclick="drawCartesian()">Generar Gráfico A × B</button>
 
-        <div class="results">
+ <div class="results">
             <div class="result-item"><strong>A × B =</strong> <span id="resCartesian">-</span></div>
         </div>
         
-        <canvas id="cartCanvas" width="500" height="400"></canvas>
+<canvas id="cartCanvas" width="500" height="400"></canvas>
     </div>
-
     <!-- Módulo 3: Paradoja de Russell -->
     <div id="russell" class="tab-content">
         <h2>Demostración Interactiva: La Paradoja de Russell</h2>
         <p>Exploración del <em>Ejemplo 2.4</em> y la paradoja del barbero As-Samet.</p>
         
-        <div class="paradox-box">
+ <div class="paradox-box">
             <h4>¿El conjunto de todos los conjuntos existe?</h4>
             <p>Supongamos la clase $R = \{x : x \notin x\}$. ¿Pertenece $R$ a sí mismo?</p>
             <div class="input-group">
