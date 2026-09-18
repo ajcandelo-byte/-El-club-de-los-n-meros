@@ -5,5 +5,3 @@
 
 ---
 
-🌐 **Visita la aplicación web interactiva:**  
-[https://ajcandelo-byte.github.io/-El-club-de-los-n-meros/](https://ajcandelo-byte.github.io/-El-club-de-los-n-meros/)
