@@ -7,5 +7,5 @@
 🌐 **Accede al simulador interactivo en vivo:**  
 [https://ajcandelo-byte.github.io/-El-club-de-los-n-meros/](https://ajcandelo-byte.github.io/-El-club-de-los-n-meros/)[cite: 1, 3]
 
-### **Referencias Académicas (Normas APA 7.ª ed.)**
+### **Referencias Académicas **
 * Hernández Hernández, F. (1998). *Teoría de conjuntos: Una introducción*. Sociedad Matemática Mexicana[cite: 1, 6].
