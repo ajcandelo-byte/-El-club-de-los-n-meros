@@ -21,43 +21,43 @@
       --card-border: #e9ecef;
     }
 
-    html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; }
     body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--text-dark); max-width: 900px; margin: 0 auto; padding: 25px; padding-top: 80px; background-color: #ffffff; }
     
-    /* Navegación superior */
+  /* Navegación superior */
     nav.nav-bar { position: fixed; top: 0; left: 0; right: 0; background-color: var(--primary); padding: 12px 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); z-index: 1000; text-align: center; }
     nav.nav-bar a { color: white; text-decoration: none; font-weight: bold; margin: 0 10px; font-size: 14px; transition: color 0.2s; }
     nav.nav-bar a:hover { color: #d1e7dd; text-decoration: underline; }
 
-    h1 { color: var(--primary); text-align: center; margin-bottom: 5px; font-size: 2.2em; }
+   h1 { color: var(--primary); text-align: center; margin-bottom: 5px; font-size: 2.2em; }
     .subtitle-header { text-align: center; color: #6c757d; font-size: 1.1em; margin-bottom: 30px; }
     h2 { color: #1a252c; border-bottom: 3px solid var(--primary); padding-bottom: 6px; margin-top: 40px; }
     h3 { color: #495057; }
     
-    /* Cajas y simuladores */
+   /* Cajas y simuladores */
     .simulador-box { max-width: 650px; margin: 30px auto; padding: 25px; border-radius: 12px; background-color: var(--bg-light); border: 1px solid var(--card-border); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
     .form-group { margin-bottom: 15px; }
     .form-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #495057; }
     .form-group input, .form-group select { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ced4da; box-sizing: border-box; font-size: 14px; }
     
-    .btn-calcular { width: 100%; padding: 12px; background-color: var(--primary); color: white; border: none; border-radius: 6px; font-weight: bold; font-size: 15px; cursor: pointer; transition: background 0.2s; }
+   .btn-calcular { width: 100%; padding: 12px; background-color: var(--primary); color: white; border: none; border-radius: 6px; font-weight: bold; font-size: 15px; cursor: pointer; transition: background 0.2s; }
     .btn-calcular:hover { background-color: var(--primary-dark); }
     .btn-purple { background-color: var(--secondary); }
     .btn-purple:hover { background-color: #59359a; }
 
-    /* Pestañas del simulador de conjuntos */
+   /* Pestañas del simulador de conjuntos */
     .tabs { display: flex; gap: 8px; margin-bottom: 20px; }
     .tab-btn { flex: 1; padding: 10px; border: 1px solid var(--card-border); background: #e9ecef; cursor: pointer; border-radius: 6px; font-weight: bold; color: #495057; font-size: 13px; }
     .tab-btn.active { background: var(--secondary); color: white; border-color: var(--secondary); }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    canvas { border: 1px solid #ced4da; background-color: #ffffff; margin-top: 15px; border-radius: 6px; width: 100%; max-width: 500px; display: block; margin-left: auto; margin-right: auto; }
+   canvas { border: 1px solid #ced4da; background-color: #ffffff; margin-top: 15px; border-radius: 6px; width: 100%; max-width: 500px; display: block; margin-left: auto; margin-right: auto; }
 
-    .referencias { background-color: var(--bg-light); padding: 20px; border-radius: 8px; border: 1px solid var(--card-border); font-size: 0.95em; }
+  .referencias { background-color: var(--bg-light); padding: 20px; border-radius: 8px; border: 1px solid var(--card-border); font-size: 0.95em; }
     .referencias p { text-indent: -2em; padding-left: 2em; margin-bottom: 12px; }
 
-    .btn-back-top { position: fixed; bottom: 20px; right: 20px; background-color: var(--primary); color: white; border: none; padding: 10px 16px; border-radius: 20px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); text-decoration: none; font-size: 14px; }
+  .btn-back-top { position: fixed; bottom: 20px; right: 20px; background-color: var(--primary); color: white; border: none; padding: 10px 16px; border-radius: 20px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); text-decoration: none; font-size: 14px; }
     .btn-back-top:hover { background-color: var(--primary-dark); }
   </style>
 </head>
@@ -87,19 +87,20 @@
     </div>
 
     <!-- Módulo A: Álgebra de Conjuntos -->
-    <div id="algebra" class="tab-content active">
+  <div id="algebra" class="tab-content active">
       <p style="font-size: 0.9em; color: #6c757d;">Ingresa elementos separados por comas:</p>
       <div class="form-group">
         <label for="setA">Conjunto A:</label>
         <input type="text" id="setA" value="1, 2, 3">
       </div>
-      <div class="form-group">
+     
+  <div class="form-group">
         <label for="setB">Conjunto B:</label>
         <input type="text" id="setB" value="2, 3, 4">
       </div>
       <button class="btn-calcular btn-purple" onclick="calculateSets()">Calcular Operaciones</button>
 
-      <div id="setResults" style="margin-top: 15px; font-family: monospace; font-size: 0.95em;">
+   <div id="setResults" style="margin-top: 15px; font-family: monospace; font-size: 0.95em;">
         <p><strong>A ∪ B (Unión):</strong> <span id="resUnion">-</span></p>
         <p><strong>A ∩ B (Intersección):</strong> <span id="resInter">-</span></p>
         <p><strong>A \ B (Diferencia):</strong> <span id="resDiffAB">-</span></p>
@@ -109,7 +110,7 @@
     </div>
 
     <!-- Módulo B: Producto Cartesiano -->
-    <div id="cartesiano" class="tab-content">
+  <div id="cartesiano" class="tab-content">
       <p style="font-size: 0.9em; color: #6c757d;">Ingresa números para graficar las parejas ordenadas (a, b):</p>
       <div class="form-group">
         <label for="cartA">Conjunto A (Eje X):</label>
@@ -126,7 +127,7 @@
     </div>
 
     <!-- Módulo C: Paradoja de Russell -->
-    <div id="russell" class="tab-content">
+   <div id="russell" class="tab-content">
       <h4>¿Existe el conjunto de todos los conjuntos?</h4>
       <p style="font-size: 0.9em;">Analicemos la clase R = {x : x ∉ x}[cite: 1]. ¿Se contiene R a sí mismo?</p>
       <div class="form-group">
@@ -140,14 +141,14 @@
     </div>
   </div>
 
-  <h3 id="referencias">Referencias Académicas (Normas APA 7)</h3>
+  <h3 id="referencias">Referencias Académicas  </h3>
   <div class="referencias">
     <p>Hernández Hernández, F. (1998). <em>Teoría de conjuntos: Una introducción</em>. Sociedad Matemática Mexicana[cite: 1].</p>
   </div>
 
   <a href="#inicio" class="btn-back-top">⬆️ Regresar arriba</a>
 
-  <!-- LÓGICA JAVASCRIPT -->
+ <!-- LÓGICA JAVASCRIPT -->
   <script>
     function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -236,14 +237,20 @@
       });
     }
 
-    function testRussell() {
+    function testRussell() 
+    {
+      
       const val = document.getElementById('russellChoice').value;
       const resDiv = document.getElementById('russellResult');
-      if (val === 'in') {
+      if (val === 'in') 
+      {
         resDiv.innerHTML = "<span style='color: #dc3545;'>CONTRADICCIÓN:</span> Si R ∈ R, por definición de R se deduce que R ∉ R.";
-      } else if (val === 'notin') {
+      } else if (val === 'notin')
+      {
         resDiv.innerHTML = "<span style='color: #dc3545;'>CONTRADICCIÓN:</span> Si R ∉ R, entonces cumple la condición para pertenecer a R (luego R ∈ R).";
-      } else {
+      } 
+      else 
+      {
         resDiv.innerHTML = "";
       }
     }
