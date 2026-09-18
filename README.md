@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>El Club de los Números & Simulador ZFC</title>
+  <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>El Club de los Números & Simulador ZFC</title>
   <style>
     :root {
       --primary: #0d6efd;
@@ -102,7 +102,8 @@
         }
       }
 
-      // Evaluación de Fracciones (a/b)
+   // Evaluación de Fracciones (a/b)
+      
       if (val.includes('/')) {
         let parts = val.split('/');
         if (parts.length === 2) {
