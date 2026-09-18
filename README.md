@@ -1,0 +1,362 @@
+# -El-club-de-los-n-meros
+¿Recuerdas los conjuntos numéricos? 🧐 Pon a prueba tu mente en "El club de los números": una experiencia interactiva para clasificar de forma fácil y rápida quién es quién en N, Z, Q, I y R. ¡Ingresa y practica ya! 🚀
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Interactivo de Teoría de Conjuntos</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            border: none;
+            background: #e0e0e0;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .tab-btn.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button.calc-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button.calc-btn:hover {
+            background: #2980b9;
+        }
+
+        .results {
+            margin-top: 20px;
+            background: #f1f8ff;
+            padding: 15px;
+            border-left: 4px solid var(--accent);
+            border-radius: 4px;
+        }
+
+        .result-item {
+            margin-bottom: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.05em;
+        }
+
+        canvas {
+            border: 1px solid #ccc;
+            background-color: #fff;
+            margin-top: 15px;
+            border-radius: 4px;
+        }
+
+        .paradox-box {
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Simulador Interactivo: Teoría de Conjuntos</h1>
+        <p>Basado en la axiomática ZFC (Hernández Hernández)</p>
+    </div>  
+  
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('algebra')">Álgebra de Conjuntos</button>
+        <button class="tab-btn" onclick="switchTab('cartesiano')">Producto Cartesiano 2D</button>
+        <button class="tab-btn" onclick="switchTab('russell')">Paradoja de Russell</button>
+    </div>
+
+    <!-- Módulo 1: Álgebra de Conjuntos -->
+    <div id="algebra" class="tab-content active">
+        <h2>Calculadora de Operaciones de Conjuntos</h2>
+        <p>Ingrese los elementos de los conjuntos separados por comas (ejemplo: <code>1, 2, 3</code> o <code>a, b, c</code>):</p>
+        
+        <div class="input-group">
+            <label for="setA">Conjunto A:</label>
+            <input type="text" id="setA" value="1, 2, 3">
+        </div>
+        <div class="input-group">
+            <label for="setB">Conjunto B:</label>
+            <input type="text" id="setB" value="2, 3, 4">
+        </div>
+
+        <button class="calc-btn" onclick="calculateSets()">Calcular Operaciones</button>
+
+        <div class="results" id="setResults">
+            <div class="result-item"><strong>A ∪ B (Unión):</strong> <span id="resUnion">-</span></div>
+            <div class="result-item"><strong>A ∩ B (Intersección):</strong> <span id="resInter">-</span></div>
+            <div class="result-item"><strong>A \ B (Diferencia A - B):</strong> <span id="resDiffAB">-</span></div>
+            <div class="result-item"><strong>B \ A (Diferencia B - A):</strong> <span id="resDiffBA">-</span></div>
+            <div class="result-item"><strong>A Δ B (Diferencia Simétrica):</strong> <span id="resSymDiff">-</span></div>
+            <div class="result-item"><strong>P(A) (Conjunto Potencia de A):</strong> <span id="resPowerA">-</span></div>
+        </div>
+    </div>
+
+    <!-- Módulo 2: Producto Cartesiano -->
+    <div id="cartesiano" class="tab-content">
+        <h2>Visualizador del Producto Cartesiano (A × B)</h2>
+        <p>Ingrese conjuntos numéricos para graficar las parejas ordenadas <code>(a, b)</code> en el plano:</p>
+        
+        <div class="input-group">
+            <label for="cartA">Conjunto A (Eje X):</label>
+            <input type="text" id="cartA" value="1, 2, 3, 4">
+        </div>
+        <div class="input-group">
+            <label for="cartB">Conjunto B (Eje Y):</label>
+            <input type="text" id="cartB" value="1, 2, 3">
+        </div>
+
+        <button class="calc-btn" onclick="drawCartesian()">Generar Gráfico A × B</button>
+
+        <div class="results">
+            <div class="result-item"><strong>A × B =</strong> <span id="resCartesian">-</span></div>
+        </div>
+        
+        <canvas id="cartCanvas" width="500" height="400"></canvas>
+    </div>
+
+    <!-- Módulo 3: Paradoja de Russell -->
+    <div id="russell" class="tab-content">
+        <h2>Demostración Interactiva: La Paradoja de Russell</h2>
+        <p>Exploración del <em>Ejemplo 2.4</em> y la paradoja del barbero As-Samet.</p>
+        
+        <div class="paradox-box">
+            <h4>¿El conjunto de todos los conjuntos existe?</h4>
+            <p>Supongamos la clase $R = \{x : x \notin x\}$. ¿Pertenece $R$ a sí mismo?</p>
+            <div class="input-group">
+                <label>Selecciona una hipótesis sobre R:</label>
+                <select id="russellChoice" onchange="testRussell()" style="padding: 8px; width: 100%;">
+                    <option value="">-- Selecciona --</option>
+                    <option value="in">Asumir que R ∈ R</option>
+                    <option value="notin">Asumir que R ∉ R</option>
+                </select>
+            </div>
+            <div id="russellResult" style="margin-top: 15px; font-weight: bold;"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Gestión de pestañas
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        
+        document.getElementById(tabId).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+
+    // Funciones auxiliares para teoría de conjuntos
+    function parseSet(inputStr) {
+        if (!inputStr.trim()) return [];
+        return Array.from(new Set(inputStr.split(',').map(e => e.trim()).filter(e => e !== '')));
+    }
+
+    function formatSet(arr) {
+        return '{ ' + arr.join(', ') + ' }';
+    }
+
+    // Calculadora de operaciones
+    function calculateSets() {
+        const A = parseSet(document.getElementById('setA').value);
+        const B = parseSet(document.getElementById('setB').value);
+
+        // Unión
+        const union = Array.from(new Set([...A, ...B]));
+        
+        // Intersección
+        const inter = A.filter(x => B.includes(x));
+        
+        // Diferencia A \ B
+        const diffAB = A.filter(x => !B.includes(x));
+        
+        // Diferencia B \ A
+        const diffBA = B.filter(x => !A.includes(x));
+        
+        // Diferencia Simétrica A Δ B
+        const symDiff = [...diffAB, ...diffBA];
+
+        // Conjunto Potencia P(A)
+        const powerA = [[]];
+        for (const elem of A) {
+            const len = powerA.length;
+            for (let i = 0; i < len; i++) {
+                powerA.push([...powerA[i], elem]);
+            }
+        }
+        const formattedPower = '{ ' + powerA.map(s => s.length === 0 ? '∅' : '{' + s.join(',') + '}').join(', ') + ' }';
+
+        // Renderizado de resultados
+        document.getElementById('resUnion').innerText = formatSet(union);
+        document.getElementById('resInter').innerText = inter.length ? formatSet(inter) : '∅';
+        document.getElementById('resDiffAB').innerText = diffAB.length ? formatSet(diffAB) : '∅';
+        document.getElementById('resDiffBA').innerText = diffBA.length ? formatSet(diffBA) : '∅';
+        document.getElementById('resSymDiff').innerText = symDiff.length ? formatSet(symDiff) : '∅';
+        document.getElementById('resPowerA').innerText = formattedPower;
+    }
+
+    // Visualizador Producto Cartesiano
+    function drawCartesian() {
+        const A = parseSet(document.getElementById('cartA').value).map(Number).filter(n => !isNaN(n));
+        const B = parseSet(document.getElementById('cartB').value).map(Number).filter(n => !isNaN(n));
+
+        const pairs = [];
+        A.forEach(a => {
+            B.forEach(b => {
+                pairs.push(`(${a}, ${b})`);
+            });
+        });
+
+        document.getElementById('resCartesian').innerText = '{ ' + pairs.join(', ') + ' }';
+
+        // Dibujar en Canvas
+        const canvas = document.getElementById('cartCanvas');
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const padding = 40;
+        const width = canvas.width - 2 * padding;
+        const height = canvas.height - 2 * padding;
+
+        const maxX = Math.max(...A, 5);
+        const maxY = Math.max(...B, 5);
+
+        // Ejes
+        ctx.beginPath();
+        ctx.strokeStyle = '#333';
+        ctx.lineWidth = 2;
+        ctx.moveTo(padding, canvas.height - padding);
+        ctx.lineTo(canvas.width - padding, canvas.height - padding); // Eje X
+        ctx.moveTo(padding, canvas.height - padding);
+        ctx.lineTo(padding, padding); // Eje Y
+        ctx.stroke();
+
+        // Puntos
+        A.forEach(a => {
+            B.forEach(b => {
+                const x = padding + (a / maxX) * width;
+                const y = (canvas.height - padding) - (b / maxY) * height;
+
+                ctx.beginPath();
+                ctx.arc(x, y, 6, 0, Math.PI * 2);
+                ctx.fillStyle = '#3498db';
+                ctx.fill();
+                ctx.strokeStyle = '#2c3e50';
+                ctx.stroke();
+
+                ctx.fillStyle = '#333';
+                ctx.font = '12px Arial';
+                ctx.fillText(`(${a},${b})`, x + 8, y - 8);
+            });
+        });
+    }
+
+    // Lógica Paradoja de Russell
+    function testRussell() {
+        const val = document.getElementById('russellChoice').value;
+        const resDiv = document.getElementById('russellResult');
+
+        if (val === 'in') {
+            resDiv.innerHTML = "<span style='color:red;'>CONTRADICCIÓN:</span> Si R ∈ R, por definición de R (objetos que no se contienen a sí mismos), se concluye que R ∉ R.";
+        } else if (val === 'notin') {
+            resDiv.innerHTML = "<span style='color:red;'>CONTRADICCIÓN:</span> Si R ∉ R, entonces R cumple la condición para pertenecer a R, luego R ∈ R.";
+        } else {
+            resDiv.innerHTML = "";
+        }
+    }
+
+    // Inicializar al cargar
+    calculateSets();
+</script>
+
+</body>
+</html>
+   
