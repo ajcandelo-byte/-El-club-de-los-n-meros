@@ -75,7 +75,7 @@
   <h2>Presentación del Proyecto</h2>
   <p>¿A qué club pertenecen &pi; o &radic;2? 🧠 Descubre y clasifica números en tiempo real con nuestra herramienta interactiva sobre conjuntos (&mathbb;N, &mathbb;Z, &mathbb;Q, &mathbb;I, &mathbb;R). ¡Pon a prueba tu mente sin complicaciones! 🚀</p>
 
-  <!-- SIMULADOR INTERACTIVO DE CONJUNTOS -->
+  !-- SIMULADOR INTERACTIVO DE CONJUNTOS -->
   <h2 id="simulador-conjuntos">Simulador de Teoría de Conjuntos</h2>
   <p>Basado en la axiomática ZFC (Hernández Hernández, 1998)[cite: 1]. Explora operaciones de conjuntos, el producto cartesiano 2D y la Paradoja de Russell[cite: 1].</p>
 
@@ -86,7 +86,7 @@
       <button class="tab-btn" onclick="switchTab('russell')">Paradoja de Russell</button>
     </div>
 
-    <!-- Módulo A: Álgebra de Conjuntos -->
+!-- Módulo A: Álgebra de Conjuntos -->
   <div id="algebra" class="tab-content active">
       <p style="font-size: 0.9em; color: #6c757d;">Ingresa elementos separados por comas:</p>
       <div class="form-group">
@@ -109,7 +109,7 @@
       </div>
     </div>
 
-    <!-- Módulo B: Producto Cartesiano -->
+!-- Módulo B: Producto Cartesiano -->
   <div id="cartesiano" class="tab-content">
       <p style="font-size: 0.9em; color: #6c757d;">Ingresa números para graficar las parejas ordenadas (a, b):</p>
       <div class="form-group">
@@ -122,11 +122,11 @@
       </div>
       <button class="btn-calcular btn-purple" onclick="drawCartesian()">Graficar A × B</button>
       
-      <p style="margin-top: 10px; font-family: monospace; font-size: 0.9em;"><strong>A × B =</strong> <span id="resCartesian">-</span></p>
+  <p style="margin-top: 10px; font-family: monospace; font-size: 0.9em;"><strong>A × B =</strong> <span id="resCartesian">-</span></p>
       <canvas id="cartCanvas" width="400" height="300"></canvas>
     </div>
 
-    <!-- Módulo C: Paradoja de Russell -->
+  !-- Módulo C: Paradoja de Russell -->
    <div id="russell" class="tab-content">
       <h4>¿Existe el conjunto de todos los conjuntos?</h4>
       <p style="font-size: 0.9em;">Analicemos la clase R = {x : x ∉ x}[cite: 1]. ¿Se contiene R a sí mismo?</p>
@@ -148,7 +148,7 @@
 
   <a href="#inicio" class="btn-back-top">⬆️ Regresar arriba</a>
 
- <!-- LÓGICA JAVASCRIPT -->
+ !-- LÓGICA JAVASCRIPT -->
   <script>
     function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
