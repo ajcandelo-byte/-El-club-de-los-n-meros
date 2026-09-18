@@ -1,7 +1,8 @@
 
 # El club de los números: ¿Quién es quién en ℝ, ℤ, ℚ, 𝕀 y ℝ?
 
-¿A qué club pertenecen $\pi$ o $\sqrt{2}$? 🧠 Descubre y clasifica números en tiempo real con nuestra herramienta interactiva sobre conjuntos ($\mathbb{N}, \mathbb{Z}, \mathbb{Q}, \mathbb{I}, \mathbb{R}$). ¡Pon a prueba tu mente sin complicaciones! 🚀
+¿A qué club pertenecen $\pi$ o $\sqrt{2}$? 🧠 Descubre y clasifica números en tiempo real con nuestra herramienta interactiva sobre conjuntos ($\mathbb{N}, \mathbb{Z}, \mathbb{Q}, \mathbb{I}, \mathbb{R}$). 
+¡Pon a prueba tu mente sin complicaciones! 🚀
 
 ---
 <!DOCTYPE html>
@@ -21,8 +22,8 @@
       --card-border: #e9ecef;
     }
 
-  html { scroll-behavior: smooth; }
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--text-dark); max-width: 900px; margin: 0 auto; padding: 25px; padding-top: 80px; background-color: #ffffff; }
+</html> { scroll-behavior: smooth; }
+<body> { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--text-dark); max-width: 900px; margin: 0 auto; padding: 25px; padding-top: 80px; background-color: #ffffff; }
     
   /* Navegación superior */
     nav.nav-bar { position: fixed; top: 0; left: 0; right: 0; background-color: var(--primary); padding: 12px 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); z-index: 1000; text-align: center; }
@@ -62,8 +63,7 @@
   </style>
 </head>
 <body id="inicio">
-
-  <nav class="nav-bar">
+  <nav> class="nav-bar">
     <a href="#inicio">🏠 Inicio</a>
     <a href="#simulador-conjuntos">🧠 El Club de los Números</a>
     <a href="#referencias">📚 Referencias</a>
