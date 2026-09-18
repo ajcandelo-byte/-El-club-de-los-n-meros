@@ -1,9 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>El Club de los Números & Simulador ZFC</title>
+  
+  <title>El Club de los Números & Simulador ZFC </title>
   <style>
     :root {
       --primary: #0d6efd;
@@ -230,19 +232,26 @@
       });
     }
 
-    function testRussell() {
+    function testRussell() 
+    {
       const val = document.getElementById('russellChoice').value;
       const resDiv = document.getElementById('russellResult');
-      if (val === 'in') {
+      if (val === 'in')
+      {
         resDiv.innerHTML = "<span style='color: #dc3545;'>CONTRADICCIÓN:</span> Si R ∈ R, por definición de R se deduce que R ∉ R.";
-      } else if (val === 'notin') {
+      } else if (val === 'notin') 
+      {
         resDiv.innerHTML = "<span style='color: #dc3545;'>CONTRADICCIÓN:</span> Si R ∉ R, entonces cumple la condición para pertenecer a R (luego R ∈ R).";
-      } else {
+      } else 
+      {
         resDiv.innerHTML = "";
       }
     }
 
     calculateSets();
+    
   </script>
+  
 </body>
+
 </html>
