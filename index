@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Teoría de Conjuntos</title>
+  <style>
+    :root {
+      --primary: #0d6efd;
+      --secondary: #6f42c1;
+      --success: #198754;
+      --danger: #dc3545;
+      --bg-card: #f8f9fa;
+      --border-color: #e3e6f0;
+      --text-dark: #212529;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background-color: #ffffff;
+      color: var(--text-dark);
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .container {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border: 1px solid var(--border-color);
+    }
+
+    h1 { text-align: center; color: var(--primary); font-size: 1.8rem; }
+
+    .grid-inputs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ced4da;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover { background-color: #0b5ed7; }
+
+    .theorem-box {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      background-color: #fff;
+      border-left: 5px solid var(--secondary);
+      border-right: 1px solid var(--border-color);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+      color: #fff;
+    }
+    .badge-success { background-color: var(--success); }
+    .badge-danger { background-color: var(--danger); }
+
+    ul { list-style: none; padding-left: 0; }
+    li { padding: 6px 0; border-bottom: 1px solid var(--border-color); font-family: monospace; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🧠 Resolver Teoremas y Operaciones de Conjuntos</h1>
+
+    <div class="grid-inputs">
+      <div class="form-group">
+        <label for="setU">Universo (U):</label>
+        <input type="text" id="setU" value="1, 2, 3, 4, 5, 6, 7, 8, 9, 10">
+      </div>
+      <div class="form-group">
+        <label for="setA">Conjunto A:</label>
+        <input type="text" id="setA" value="1, 2, 3, 4, 5">
+      </div>
+      <div class="form-group">
+        <label for="setB">Conjunto B:</label>
+        <input type="text" id="setB" value="4, 5, 6, 7">
+      </div>
+    </div>
+
+    <button onclick="solveSets()">Calcular Operaciones y Validar Teoremas</button>
+
+    <div class="theorem-box">
+      <h3>📊 Operaciones Fundamentales</h3>
+      <ul>
+        <li><strong>A ∪ B (Unión):</strong> <span id="outUnion">-</span></li>
+        <li><strong>A ∩ B (Intersección):</strong> <span id="outInter">-</span></li>
+        <li><strong>A \ B (Diferencia):</strong> <span id="outDiffAB">-</span></li>
+        <li><strong>Aᶜ (Complemento A):</strong> <span id="outCompA">-</span></li>
+        <li><strong>Bᶜ (Complemento B):</strong> <span id="outCompB">-</span></li>
+      </ul>
+    </div>
+
+    <div class="theorem-box" style="border-left-color: var(--primary);">
+      <h3>📜 Verificación de Teoremas</h3>
+      <div class="form-group">
+        <label for="theoremSelect">Selecciona un Teorema:</label>
+        <select id="theoremSelect" onchange="solveSets()">
+          <option value="demorgan1">1ª Ley de De Morgan: (A ∪ B)ᶜ = Aᶜ ∩ Bᶜ</option>
+          <option value="demorgan2">2ª Ley de De Morgan: (A ∩ B)ᶜ = Aᶜ ∪ Bᶜ</option>
+          <option value="diff_identity">Teorema de Diferencia: A \ B = A ∩ Bᶜ</option>
+          <option value="complement_union">Ley del Complemento: A ∪ Aᶜ = U</option>
+        </select>
+      </div>
+      <div id="theoremProofResult" style="margin-top: 15px;"></div>
+    </div>
+  </div>
+
+  <script>
+    function parseSet(str) {
+      if (!str.trim()) return [];
+      return Array.from(new Set(str.split(',').map(e => e.trim()).filter(e => e !== '')));
+    }
+
+    function formatSet(arr) {
+      return arr.length === 0 ? '∅' : '{ ' + arr.sort().join(', ') + ' }';
+    }
+
+    function solveSets() {
+      const U = parseSet(document.getElementById('setU').value);
+      const A = parseSet(document.getElementById('setA').value);
+      const B = parseSet(document.getElementById('setB').value);
+
+      const union = Array.from(new Set([...A, ...B]));
+      const inter = A.filter(x => B.includes(x));
+      const diffAB = A.filter(x => !B.includes(x));
+      const compA = U.filter(x => !A.includes(x));
+      const compB = U.filter(x => !B.includes(x));
+
+      document.getElementById('outUnion').innerText = formatSet(union);
+      document.getElementById('outInter').innerText = formatSet(inter);
+      document.getElementById('outDiffAB').innerText = formatSet(diffAB);
+      document.getElementById('outCompA').innerText = formatSet(compA);
+      document.getElementById('outCompB').innerText = formatSet(compB);
+
+      const selectedTheorem = document.getElementById('theoremSelect').value;
+      const proofDiv = document.getElementById('theoremProofResult');
+
+      let lhs = [], rhs = [], formulaText = "";
+
+      if (selectedTheorem === 'demorgan1') {
+        formulaText = "(A ∪ B)ᶜ = Aᶜ ∩ Bᶜ";
+        lhs = U.filter(x => !union.includes(x));
+        rhs = compA.filter(x => compB.includes(x));
+      } else if (selectedTheorem === 'demorgan2') {
+        formulaText = "(A ∩ B)ᶜ = Aᶜ ∪ Bᶜ";
+        lhs = U.filter(x => !inter.includes(x));
+        rhs = Array.from(new Set([...compA, ...compB]));
+      } else if (selectedTheorem === 'diff_identity') {
+        formulaText = "A \\ B = A ∩ Bᶜ";
+        lhs = diffAB;
+        rhs = A.filter(x => compB.includes(x));
+      } else if (selectedTheorem === 'complement_union') {
+        formulaText = "A ∪ Aᶜ = U";
+        lhs = Array.from(new Set([...A, ...compA]));
+        rhs = U;
+      }
+
+      const isValid = JSON.stringify(lhs.sort()) === JSON.stringify(rhs.sort());
+
+      proofDiv.innerHTML = `
+        <p><strong>Lado Izquierdo (LHS):</strong> ${formatSet(lhs)}</p>
+        <p><strong>Lado Derecho (RHS):</strong> ${formatSet(rhs)}</p>
+        <p><strong>Resultado:</strong> 
+          <span class="badge ${isValid ? 'badge-success' : 'badge-danger'}">
+            ${isValid ? '✅ TEOREMA DEMOSTRADO' : '❌ NO CUMPLE EN EL UNIVERSO'}
+          </span>
+        </p>
+      `;
+    }
+
+    solveSets();
+  </script>
+</body>
+</html>
